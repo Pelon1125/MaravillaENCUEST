@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orden de Retiro / Encuesta de Devolución de Equipo</title>
+<style>
+  :root{
+    --line:#1e293b;
+    --muted:#334155;
+    --bg:#ffffff;
+    --accent:#0f172a;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background:#f6f7fb;
+    color:#0b0f19;
+  }
+
+  .sheet{
+    max-width: 900px;
+    margin: 36px auto;
+    background: var(--bg);
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(2,6,23,.08);
+    padding: 22px;
+  }
+
+  header{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    align-items:center;
+    gap:16px;
+    padding:8px 12px 14px;
+    border:2px solid var(--line);
+  }
+  header h1{
+    margin:0;
+    font-size: 20px;
+    letter-spacing:.5px;
+    text-transform: uppercase;
+  }
+  .badge{
+    font-size:12px;
+    color:#475569;
+  }
+  .logo{
+    width:82px;height:82px;
+    border:2px solid var(--line);
+    display:grid;place-items:center;
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .block{
+    border:2px solid var(--line);
+    margin-top:14px;
+  }
+  .block .title{
+    background:#eef2ff;
+    border-bottom:2px solid var(--line);
+    padding:6px 10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    font-size:13px;
+  }
+  .block .content{
+    padding:10px 12px;
+  }
+
+  .grid-2{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+  .grid-3{display:grid; grid-template-columns: repeat(3,1fr); gap:10px}
+  .grid-4{display:grid; grid-template-columns: repeat(4,1fr); gap:10px}
+
+  label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:var(--muted);
+    display:block;
+    margin-bottom:4px;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="email"],
+  select,
+  textarea{
+    width:100%;
+    padding:9px 10px;
+    border:1.8px solid var(--line);
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+    background:#fff;
+  }
+  textarea{min-height:84px; resize:vertical}
+
+  .checkline{
+    display:grid;
+    grid-template-columns: 1.3fr repeat(2,.6fr);
+    gap:10px; align-items:center;
+    border-bottom:1px dashed #cbd5e1; padding:6px 0;
+  }
+  .checkline:last-child{border-bottom:none}
+  .checkgroup{
+    display:flex; gap:14px; align-items:center;
+    font-size:14px;
+  }
+  .checkgroup input{transform:translateY(1px)}
+
+  .notice{
+    font-size:12px;color:#64748b;margin-top:6px
+  }
+
+  .actions{
+    display:flex; gap:10px; justify-content:flex-end; margin-top:18px
+  }
+  button{
+    border:2px solid var(--accent);
+    background:var(--accent);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  button.secondary{
+    background:#fff;color:var(--accent);
+  }
+
+  .mini{
+    display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:end
+  }
+
+  @media print{
+    body{background:#fff}
+    .sheet{box-shadow:none; margin:0; border-radius:0; border-width:1px}
+    .actions{display:none}
+    a[href]:after{content:""}
+  }
+</style>
+</head>
+<body>
+
+<form class="sheet" id="formRetiro" autocomplete="on">
+  <header>
+    <div>
+      <h1>Orden de Retiro de Activo Promocional</h1>
+      <div class="badge">Encuesta / Acta de Devolución</div>
+    </div>
+    <div class="logo">
+      <img src="distribuidora_maravilla_s_a_logo.jpeg" alt="Logo Empresa">
+    </div>
+  </header>
+
+  <div class="block">
+    <div class="title">Correo de destino</div>
+    <div class="content">
+      <label for="correoDestino">Ingrese el correo al que quiere enviar</label>
+      <input id="correoDestino" name="correoDestino" type="email" required placeholder="ejemplo@correo.com">
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Motivo y fecha</div>
+    <div class="content grid-3">
+      <div>
+        <label for="motivo">Motivo del retiro</label>
+        <select id="motivo" name="motivo" required>
+          <option value="" hidden>Seleccione…</option>
+          <option>Por retiro concesión</option>
+          <option>Baja rotación</option>
+          <option>Mantenimiento / falla</option>
+          <option>Incumplimiento de contrato</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div>
+        <label for="lugar">Lugar</label>
+        <input id="lugar" name="lugar" type="text" placeholder="Ciudad / Municipio" required>
+      </div>
+      <div>
+        <label for="fecha">Fecha</label>
+        <input id="fecha" name="fecha" type="date" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Información del negocio</div>
+    <div class="content">
+      <div class="grid-4">
+        <div>
+          <label for="region">Región BNC</label>
+          <input id="region" name="region" type="text" placeholder="CENTRO">
+        </div>
+        <div>
+          <label for="codigoBNC">Código BNC</label>
+          <input id="codigoBNC" name="codigoBNC" type="text">
+        </div>
+        <div>
+          <label for="agencia">Agencia BNC</label>
+          <input id="agencia" name="agencia" type="text" placeholder="CENTRO">
+        </div>
+        <div>
+          <label for="distrito">Distrito BNC / Ruta</label>
+          <input id="distrito" name="distrito" type="text">
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:10px">
+        <div>
+          <label for="negocio">Nombre del negocio</label>
+          <input id="negocio" name="negocio" type="text" required>
+        </div>
+        <div>
+          <label for="direccion">Dirección del negocio</label>
+          <input id="direccion" name="direccion" type="text" placeholder="Calle, avenida, zona, municipio" required>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Información del propietario del negocio</div>
+    <div class="content grid-3">
+      <div>
+        <label for="propietario">Nombre del propietario</label>
+        <input id="propietario" name="propietario" type="text" required>
+      </div>
+      <div>
+        <label for="encargado">Nombre del encargado</label>
+        <input id="encargado" name="encargado" type="text">
+      </div>
+      <div>
+        <label for="telProp">Teléfono</label>
+        <input id="telProp" name="telProp" type="tel" placeholder="####-####">
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Características del equipo frío</div>
+    <div class="content grid-4">
+      <div>
+        <label for="modelo">Modelo</label>
+        <input id="modelo" name="modelo" type="text" placeholder="Nevera sombrilla">
+      </div>
+      <div>
+        <label for="serie">Serie</label>
+        <input id="serie" name="serie" type="text">
+      </div>
+      <div>
+        <label for="sombrilla"># de equipo / sombrilla</label>
+        <input id="sombrilla" name="sombrilla" type="text">
+      </div>
+      <div>
+        <label for="linea">Línea</label>
+        <input id="linea" name="linea" type="text" placeholder="SOMBRILLA">
+      </div>
+      <div>
+        <label for="vendedor">Nombre vendedor</label>
+        <input id="vendedor" name="vendedor" type="text">
+      </div>
+      <div>
+        <label for="telVend">Teléfono vendedor</label>
+        <input id="telVend" name="telVend" type="tel" placeholder="####-####">
+      </div>
+      <div>
+        <label for="supervisor">Nombre supervisor</label>
+        <input id="supervisor" name="supervisor" type="text">
+      </div>
+      <div>
+        <label for="telSup">Teléfono supervisor</label>
+        <input id="telSup" name="telSup" type="tel" placeholder="####-####">
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Estado de la devolución del equipo</div>
+    <div class="content">
+      <div class="checkline">
+        <label>Imagen / Rotulación</label>
+        <div class="checkgroup">
+          <input type="radio" id="img-b" name="imagen" value="buen" required>
+          <label for="img-b">Buen estado</label>
+        </div>
+        <div class="checkgroup">
+          <input type="radio" id="img-m" name="imagen" value="mal">
+          <label for="img-m">Mal estado</label>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label>Canastas</label>
+        <div class="checkgroup">
+          <input type="radio" id="can-c" name="canastas" value="completas" required>
+          <label for="can-c">Completas</label>
+        </div>
+        <div class="checkgroup">
+          <input type="radio" id="can-nc" name="canastas" value="no-completas">
+          <label for="can-nc">No completas</label>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label>Rodos</label>
+        <div class="checkgroup">
+          <input type="radio" id="rod-b" name="rodos" value="buen" required>
+          <label for="rod-b">Buen estado</label>
+        </div>
+        <div class="checkgroup">
+          <input type="radio" id="rod-m" name="rodos" value="mal">
+          <label for="rod-m">Mal estado</label>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label>Puertas</label>
+        <div class="checkgroup">
+          <input type="radio" id="pue-b" name="puertas" value="buen" required>
+          <label for="pue-b">Buen estado</label>
+        </div>
+        <div class="checkgroup">
+          <input type="radio" id="pue-m" name="puertas" value="mal">
+          <label for="pue-m">Mal estado</label>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label>Burrito de comunicación</label>
+        <div class="checkgroup">
+          <input type="radio" id="bur-s" name="burrito" value="si" required>
+          <label for="bur-s">Sí</label>
+        </div>
+        <div class="checkgroup">
+          <input type="radio" id="bur-n" name="burrito" value="no">
+          <label for="bur-n">No</label>
+        </div>
+      </div>
+
+      <div class="checkline">
+        <label>Devolución de llaves</label>
+        <div class="checkgroup">
+          <input type="radio" id="llav-s" name="llaves" value="si" required>
+          <label for="llav-s">Sí</label>
+        </div>
+        <div class="checkgroup mini">
+          <div>
+            <input type="radio" id="llav-n" name="llaves" value="no">
+            <label for="llav-n">No</label>
+          </div>
+          <div>
+            <label for="costo" style="display:block;margin:0 0 4px 0">Costo</label>
+            <input id="costo" name="costo" type="number" step="0.01" placeholder="Q 0.00">
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">Marque las opciones correspondientes. Si aplica costo por llaves no devueltas, ingréselo en “Costo”.</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="title">Observaciones</div>
+    <div class="content">
+      <textarea id="obs" name="observaciones" placeholder="Ej.: Tiene baja rotación de helados, detalles estéticos, etc."></textarea>
+    </div>
+  </div>
+
+<div class="block">
+  <div class="title">Firmas</div>
+  <div class="content grid-2">
+    <div>
+      <label>Firma del propietario / encargado</label>
+      <input type="text" name="firmaProp" placeholder="Nombre legible">
+    </div>
+    <div>
+      <label>Firma del administrador de activo promocional</label>
+      <input type="text" name="firmaAdmin" placeholder="Nombre legible">
+    </div>
+  </div>
+</div>
+
+  <div class="actions">
+    <button type="button" class="secondary" onclick="window.print()">Imprimir / PDF</button>
+    <button type="submit">Enviar encuesta</button>
+  </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("9YrgwNAKm8ppHJDLZ");
+  })();
+
+  document.getElementById("formRetiro").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_5wz8ct2", "template_y4a3bvp", this)
+      .then(() => {
+        alert("✅ Encuesta enviada correctamente.");
+        document.getElementById("formRetiro").reset();
+      }, (err) => {
+        alert("❌ Error al enviar: " + JSON.stringify(err));
+      });
+  });
+</script>
+
+</body>
+</html>
