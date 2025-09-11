@@ -23,8 +23,6 @@ body{
   padding: 12px;
   line-height:1.5;
 }
-
-/* Contenedor principal */
 .sheet{
   max-width: 900px;
   margin: 18px auto;
@@ -34,8 +32,6 @@ body{
   box-shadow: 0 8px 24px rgba(2,6,23,.1);
   padding: 20px;
 }
-
-/* Encabezado */
 header{
   display:grid;
   grid-template-columns: 1fr auto;
@@ -71,8 +67,6 @@ header h1{
   height:100%;
   object-fit:contain;
 }
-
-/* Bloques */
 .block{
   border:2px solid var(--line);
   margin-top:22px;
@@ -92,13 +86,9 @@ header h1{
 .block .content{
   padding:14px 16px;
 }
-
-/* Grillas */
 .grid-2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
 .grid-3{display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px}
 .grid-4{display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:14px}
-
-/* Inputs */
 label{
   font-size:13px;
   text-transform:uppercase;
@@ -126,13 +116,10 @@ textarea{
   transition:border-color .2s, box-shadow .2s;
 }
 textarea{min-height:100px; resize:vertical}
-
 input:focus, select:focus, textarea:focus{
   border-color:var(--accent);
   box-shadow:0 0 0 2px rgba(15,23,42,.2);
 }
-
-/* Checklines */
 .checkline{
   display:grid;
   grid-template-columns: 1.3fr repeat(2,.7fr);
@@ -153,8 +140,6 @@ input:focus, select:focus, textarea:focus{
   font-size:14px;
 }
 .checkgroup input{transform:translateY(1px)}
-
-/* Acciones */
 .actions{
   display:flex; gap:12px; justify-content:flex-end; margin-top:22px
 }
@@ -174,8 +159,6 @@ button.secondary{
   background:#fff;color:var(--accent);
 }
 button:hover{opacity:.9; transform:translateY(-1px)}
-
-/* Firma */
 .block.signature {
   display: flex;
   flex-direction: column;
@@ -205,24 +188,19 @@ button:hover{opacity:.9; transform:translateY(-1px)}
   opacity: 0.9;
   transform:translateY(-1px);
 }
-
-/* Responsive */
 @media (max-width: 768px) {
   .grid-2,
   .grid-3,
   .grid-4 {
     grid-template-columns: 1fr !important;
   }
-
   header {
     grid-template-columns: 1fr;
     text-align: center;
   }
   .logo {margin: 12px auto 0;}
-
   .actions {flex-direction: column;}
   .actions button {width: 100%;}
-
   .checkline {
     grid-template-columns: 1fr !important;
     text-align: center;
@@ -233,29 +211,23 @@ button:hover{opacity:.9; transform:translateY(-1px)}
     justify-content:center;
     margin-bottom:4px;
   }
-
   input[type="date"] {
     width: 100% !important;
     max-width: 100% !important;
     font-size: 15px;
   }
-
   #firmaVendedor {
     max-width: 100%;
     height: 200px;
   }
   .block.signature button {width: 100%;}
 }
-
-/* Impresión */
 @media print{
   body{background:#fff}
   .sheet{box-shadow:none; margin:0; border-radius:0; border-width:1px}
   .actions{display:none}
   a[href]:after{content:""}
 }
-
-/* Validación dinámica */
 input.error, select.error, textarea.error {
   border-color: var(--error);
   background-color: #fee2e2;
@@ -266,9 +238,7 @@ input.error, select.error, textarea.error {
 </style>
 </head>
 <body>
-
 <form class="sheet" id="formRetiro" autocomplete="on">
-
 <header>
   <div>
     <h1>Orden de Retiro de Activo Promocional</h1>
@@ -278,9 +248,6 @@ input.error, select.error, textarea.error {
     <img src="maravilla.png" alt="Logo Empresa">
   </div>
 </header>
-
-<!-- Bloques completos con required en todos los inputs importantes -->
-
 <div class="block">
   <div class="title">Correo de destino</div>
   <div class="content">
@@ -288,7 +255,6 @@ input.error, select.error, textarea.error {
     <input id="correoDestino" name="correoDestino" type="email" placeholder="ejemplo@correo.com" required>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Motivo y fecha</div>
   <div class="content grid-3">
@@ -313,7 +279,6 @@ input.error, select.error, textarea.error {
     </div>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Información del negocio</div>
   <div class="content">
@@ -347,7 +312,6 @@ input.error, select.error, textarea.error {
     </div>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Información del propietario del negocio</div>
   <div class="content grid-3">
@@ -365,7 +329,6 @@ input.error, select.error, textarea.error {
     </div>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Características del equipo frío</div>
   <div class="content grid-4">
@@ -375,7 +338,7 @@ input.error, select.error, textarea.error {
     </div>
     <div>
       <label for="serie">Serie</label>
-      <input id="serie" name="serie" type="text" required>
+      <input id="serie" name="serie" type="text" >
     </div>
     <div>
       <label for="sombrilla"># de Equipo</label>
@@ -399,7 +362,6 @@ input.error, select.error, textarea.error {
     </div>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Estado de la devolución del equipo</div>
   <div class="content">
@@ -471,43 +433,33 @@ input.error, select.error, textarea.error {
     </div>
   </div>
 </div>
-
 <div class="block">
   <div class="title">Observaciones</div>
   <div class="content">
-    <textarea id="obs" name="observaciones" placeholder="Ej.: Tiene baja rotación de helados, detalles estéticos, etc." required></textarea>
+    <textarea id="obs" name="observaciones" placeholder="Ej.: Tiene baja rotación de helados, detalles estéticos, etc."></textarea>
   </div>
 </div>
-
 <div class="block signature">
   <div class="title">Firma del vendedor</div>
   <canvas id="firmaVendedor" class="signature-pad"></canvas>
   <button type="button">Borrar</button>
   <input type="hidden" name="firmaVendedor" id="firmaVendedorHidden">
 </div>
-
 <div class="actions">
   <button type="button" class="secondary" onclick="window.print()">Imprimir / PDF</button>
-<button type="submit" id="btnEnviar">Enviar encuesta</button>
+  <button type="submit" id="btnEnviar">Enviar encuesta</button>
 </div>
-
 </form>
-
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.0/dist/signature_pad.umd.min.js"></script>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Inicializar EmailJS con tu Public Key
-  emailjs.init("9YrgwNAKm8ppHJDLZ"); // 👈 Reemplaza con tu llave pública (empieza con u_)
-
-  // --- Firma ---
+  emailjs.init("9YrgwNAKm8ppHJDLZ"); 
   const canvas = document.getElementById("firmaVendedor");
   const signaturePad = new SignaturePad(canvas, {
     backgroundColor: 'rgba(255, 255, 255, 0)',
     penColor: 'rgb(0, 0, 0)',
   });
-
   function resizeCanvas() {
     const ratio = Math.max(window.devicePixelRatio || 1, 1);
     canvas.width = canvas.offsetWidth * ratio;
@@ -517,23 +469,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener("resize", resizeCanvas);
   resizeCanvas();
-
   document.querySelector(".block.signature button").addEventListener("click", () => {
     signaturePad.clear();
   });
-
-  // --- Envío del formulario ---
   document.getElementById("formRetiro").addEventListener("submit", function(event){
     event.preventDefault();
-    console.log("📩 Submit detectado en móvil/PC"); // debug
-
+    console.log("📩 Submit detectado en móvil/PC"); 
     let valid = true;
-
-    // Limpiar errores previos
     this.querySelectorAll("input, select, textarea").forEach(f => f.classList.remove("error"));
     this.querySelectorAll(".checkline").forEach(c => c.classList.remove("error"));
-
-    // Validar inputs, selects y textarea
     const fields = this.querySelectorAll("input[required], select[required], textarea[required]");
     fields.forEach(f => {
       if(f.type !== "radio" && f.value.trim() === ""){
@@ -541,8 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
         valid = false;
       }
     });
-
-    // Validar radios
     const allRadioNames = Array.from(this.querySelectorAll('input[type="radio"]'))
       .map(r => r.name)
       .filter((v,i,a)=>a.indexOf(v)===i);
@@ -553,21 +495,15 @@ document.addEventListener("DOMContentLoaded", () => {
         valid = false;
       }
     });
-
-    // Validar firma
     if(signaturePad.isEmpty()){
       alert("Por favor, dibuje la firma antes de enviar.");
       valid = false;
     }
-
     if(!valid){
       alert("Por favor, complete todos los campos obligatorios.");
       return;
     }
-
     document.getElementById("firmaVendedorHidden").value = signaturePad.toDataURL();
-
-    // Enviar con EmailJS
     emailjs.sendForm("service_5wz8ct2", "template_y4a3bvp", this)
       .then(()=>{
         alert("✅ Encuesta enviada correctamente.");
@@ -579,11 +515,11 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("❌ Error al enviar la encuesta. Intenta de nuevo.");
       });
   });
-
-  // Forzar que el botón "Enviar encuesta" dispare el submit en móviles
   document.getElementById("btnEnviar").addEventListener("click", () => {
     document.getElementById("formRetiro").dispatchEvent(new Event("submit", {cancelable: true}));
   });
 });
 </script>
+</body>
+</html>
 
